@@ -21,6 +21,7 @@
 		A8326DF419C25C68003ACFB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8326DD619C25C68003ACFB5 /* UIKit.framework */; };
 		A8326DFC19C25C68003ACFB5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8326DFA19C25C68003ACFB5 /* InfoPlist.strings */; };
 		A8326DFE19C25C68003ACFB5 /* sudokuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A8326DFD19C25C68003ACFB5 /* sudokuTests.m */; };
+		BF22B32519CF981900725BBA /* CHVFGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF22B32419CF981900725BBA /* CHVFGridModel.m */; };
 		BF9BF8EC19C377AB00AE16A7 /* CHVFGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9BF8EB19C377AB00AE16A7 /* CHVFGridView.m */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,8 @@
 		A8326DF919C25C68003ACFB5 /* sudokuTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sudokuTests-Info.plist"; sourceTree = "<group>"; };
 		A8326DFB19C25C68003ACFB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A8326DFD19C25C68003ACFB5 /* sudokuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sudokuTests.m; sourceTree = "<group>"; };
+		BF22B32319CF981900725BBA /* CHVFGridModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHVFGridModel.h; sourceTree = "<group>"; };
+		BF22B32419CF981900725BBA /* CHVFGridModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHVFGridModel.m; sourceTree = "<group>"; };
 		BF9BF8EA19C377AB00AE16A7 /* CHVFGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHVFGridView.h; sourceTree = "<group>"; };
 		BF9BF8EB19C377AB00AE16A7 /* CHVFGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHVFGridView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +125,8 @@
 				A8326DE819C25C68003ACFB5 /* CHVFViewController.m */,
 				BF9BF8EA19C377AB00AE16A7 /* CHVFGridView.h */,
 				BF9BF8EB19C377AB00AE16A7 /* CHVFGridView.m */,
+				BF22B32319CF981900725BBA /* CHVFGridModel.h */,
+				BF22B32419CF981900725BBA /* CHVFGridModel.m */,
 				A8326DEA19C25C68003ACFB5 /* Images.xcassets */,
 				A8326DD919C25C68003ACFB5 /* Supporting Files */,
 			);
@@ -256,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8326DDF19C25C68003ACFB5 /* main.m in Sources */,
+				BF22B32519CF981900725BBA /* CHVFGridModel.m in Sources */,
 				BF9BF8EC19C377AB00AE16A7 /* CHVFGridView.m in Sources */,
 				A8326DE319C25C68003ACFB5 /* CHVFAppDelegate.m in Sources */,
 				A8326DE919C25C68003ACFB5 /* CHVFViewController.m in Sources */,

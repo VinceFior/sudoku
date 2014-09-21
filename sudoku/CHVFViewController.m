@@ -8,22 +8,11 @@
 
 #import "CHVFViewController.h"
 #import "CHVFGridView.h"
-
-// For now, the initial grid is hardcoded
-int initialGrid[9][9]={
-    {7,0,0,4,2,0,0,0,9},
-    {0,0,9,5,0,0,0,0,4},
-    {0,2,0,6,9,0,5,0,0},
-    {6,5,0,0,0,0,4,3,0},
-    {0,8,0,0,0,6,0,0,7},
-    {0,1,0,0,4,5,6,0,0},
-    {0,0,0,8,6,0,0,0,2},
-    {3,4,0,9,0,0,1,0,0},
-    {8,0,0,3,0,2,7,4,0}
-};
+#import "CHVFGridModel.h"
 
 @interface CHVFViewController () {
-    CHVFGridView* _gridView;
+    CHVFGridView *_gridView;
+    CHVFGridModel *_gridModel;
 }
 
 @end
@@ -33,8 +22,10 @@ int initialGrid[9][9]={
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    _gridModel = [[CHVFGridModel alloc] init];
+    [_gridModel generateGrid];
     
     // Create grid frame
     CGRect frame = self.view.frame;
@@ -44,11 +35,11 @@ int initialGrid[9][9]={
     CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame)) * framePortion;
     CGRect gridFrame = CGRectMake(x, y, size, size);
     
-    // Initialize _gridView and set initial values from initialGrid
+    // Initialize _gridView and set initial values from _gridModel
     _gridView = [[CHVFGridView alloc] initWithFrame:gridFrame];
     for (int row = 0; row < 9; row++) {
         for (int col = 0; col < 9; col++) {
-            int value = initialGrid[row][col];
+            int value = [_gridModel getValueAtRow:row column:col];
             [_gridView setValueAtRow:row col:col to:value];
         }
     }
