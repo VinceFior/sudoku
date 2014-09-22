@@ -10,7 +10,7 @@
 
 @implementation CHVFGridModel {
     int _cells[9][9];
-    bool _isMutable[9][9];
+    BOOL _isMutable[9][9];
 }
 
 - (void)generateGrid {
@@ -48,11 +48,11 @@
     _cells[row][column] = value;
 }
 
-- (bool)isMutableAtRow:(int)row column:(int)column {
+- (BOOL)isMutableAtRow:(int)row column:(int)column {
     return _isMutable[row][column];
 }
 
-- (bool)isConsistentAtRow:(int)row column:(int)column for:(int)value {
+- (BOOL)isConsistentAtRow:(int)row column:(int)column for:(int)value {
     // Check row for inconsistency
     for (int currentRow = 0; currentRow < 9; currentRow++) {
         if (currentRow != row && _cells[currentRow][column] == value) {

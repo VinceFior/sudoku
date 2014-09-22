@@ -46,7 +46,9 @@
     for (int row = 0; row < 9; row++) {
         for (int col = 0; col < 9; col++) {
             int value = [_gridModel getValueAtRow:row column:col];
-            [_gridView setValueAtRow:row col:col to:value];
+            BOOL isMutable = (value == 0); // 0 means empty
+            [_gridView setMutableAtRow:row column:col to:isMutable];
+            [_gridView setValueAtRow:row column:col to:value];
         }
     }
     [self.view addSubview:_gridView];
@@ -64,8 +66,19 @@
 }
 
 - (void)gridCellSelectedAtRow:(NSNumber*)row col:(NSNumber*) col {
-    // For now, simply display row and col info of the cell selected
-    NSLog(@"The button is pressed, with row %@ and col %@", row, col);
+    int rowInt = [row intValue];
+    int colInt = [col intValue];
+    if (![_gridModel isMutableAtRow:rowInt column:colInt]) {
+        return;
+    }
+    
+    int currentValue = [_numPadView getCurrentValue];
+    if (![_gridModel isConsistentAtRow:rowInt column:colInt for:currentValue]) {
+        return;
+    }
+    
+    [_gridView setValueAtRow:rowInt column:colInt to:currentValue];
+    [_gridModel setValueAtRow:rowInt column:colInt to:currentValue];
 }
 
 - (void)didReceiveMemoryWarning {

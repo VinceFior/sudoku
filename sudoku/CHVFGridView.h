@@ -10,7 +10,8 @@
 
 @interface CHVFGridView : UIView
 
-- (void)setValueAtRow:(int)row col:(int)col to:(int)value;
+- (void)setMutableAtRow:(int)row column:(int)column to:(BOOL)isMutable;
+- (void)setValueAtRow:(int)row column:(int)column to:(int)value;
 - (void)setTarget:(id)target action:(SEL)action;
 
 @end
