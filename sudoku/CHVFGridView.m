@@ -9,7 +9,7 @@
 #import "CHVFGridView.h"
 
 @interface CHVFGridView () {
-    NSMutableArray* _cells;
+    NSMutableArray *_cells;
     id _target;
     SEL _action;
 }
@@ -19,6 +19,10 @@
 
 - (id) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
+    
+    float cellSeparatorPortion = 1 / 80.0;
+    float blockSeparatorPortion = 1 / 40.0; // the additional width separations between blocks
+    
     if (self) {
         self.backgroundColor = [UIColor blackColor];
         
@@ -26,8 +30,6 @@
         float frameHeight = CGRectGetHeight(frame);
         
         // Calculate the size of the spacing between cells and blocks
-        float cellSeparatorPortion = 1 / 80.0;
-        float blockSeparatorPortion = 1 / 40.0; // the additional width separations between blocks
         CGFloat cellSeparatorWidth = frameWidth * cellSeparatorPortion;
         CGFloat cellSeparatorHeight = frameHeight * cellSeparatorPortion;
         CGFloat blockSeparatorWidth = frameWidth * blockSeparatorPortion;
@@ -83,16 +85,14 @@
     }
 }
 
-- (void)cellSelected:(id)sender
-{
+- (void)cellSelected:(id)sender {
     int buttonTag = (int) [sender tag];
     int row = buttonTag / 10;
     int col = buttonTag % 10;
     [_target performSelector:_action withObject:[NSNumber numberWithInt:row] withObject:[NSNumber numberWithInt:col]];
 }
 
-- (void)setTarget:(id)target action:(SEL)action
-{
+- (void)setTarget:(id)target action:(SEL)action {
     _target = target;
     _action = action;
 }
