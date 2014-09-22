@@ -9,7 +9,7 @@
 #import "CHVFGridView.h"
 
 @interface CHVFGridView () {
-    NSMutableArray* _cells;
+    NSMutableArray *_cells;
     id _target;
     SEL _action;
 }
@@ -19,6 +19,10 @@
 
 - (id) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
+    
+    float cellSeparatorPortion = 1 / 80.0;
+    float blockSeparatorPortion = 1 / 40.0; // the additional width separations between blocks
+    
     if (self) {
         self.backgroundColor = [UIColor blackColor];
         
@@ -26,8 +30,6 @@
         float frameHeight = CGRectGetHeight(frame);
         
         // Calculate the size of the spacing between cells and blocks
-        float cellSeparatorPortion = 1 / 80.0;
-        float blockSeparatorPortion = 1 / 40.0; // the additional width separations between blocks
         CGFloat cellSeparatorWidth = frameWidth * cellSeparatorPortion;
         CGFloat cellSeparatorHeight = frameHeight * cellSeparatorPortion;
         CGFloat blockSeparatorWidth = frameWidth * blockSeparatorPortion;
@@ -59,7 +61,6 @@
                 button.tag = row * 10 + col; // e.g.: for the cell of row 2 col 7, the tag is 27
                 button.backgroundColor = [UIColor whiteColor];
                 [button setBackgroundImage:[UIImage imageNamed:@"gray-highlight"] forState:UIControlStateHighlighted];
-                [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
                 [button addTarget:self action:@selector(cellSelected:) forControlEvents:UIControlEventTouchUpInside];
                 
                 [self addSubview:button];
@@ -72,8 +73,17 @@
     return self;
 }
 
-- (void)setValueAtRow:(int)row col:(int)col to:(int)value {
-    UIButton* button = _cells[row][col];
+- (void)setMutableAtRow:(int)row column:(int)column to:(BOOL)isMutable {
+    UIButton *button = _cells[row][column];
+    if (isMutable) {
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    } else {
+        [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    }
+}
+
+- (void)setValueAtRow:(int)row column:(int)column to:(int)value {
+    UIButton *button = _cells[row][column];
     // The number 0 is used to represent blank
     if (value == 0) {
         [button setTitle:@"" forState:UIControlStateNormal];
@@ -83,16 +93,14 @@
     }
 }
 
-- (void)cellSelected:(id)sender
-{
+- (void)cellSelected:(id)sender {
     int buttonTag = (int) [sender tag];
     int row = buttonTag / 10;
-    int col = buttonTag % 10;
-    [_target performSelector:_action withObject:[NSNumber numberWithInt:row] withObject:[NSNumber numberWithInt:col]];
+    int column = buttonTag % 10;
+    [_target performSelector:_action withObject:[NSNumber numberWithInt:row] withObject:[NSNumber numberWithInt:column]];
 }
 
-- (void)setTarget:(id)target action:(SEL)action
-{
+- (void)setTarget:(id)target action:(SEL)action {
     _target = target;
     _action = action;
 }
