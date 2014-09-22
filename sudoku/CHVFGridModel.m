@@ -41,18 +41,28 @@
 }
 
 - (int)getValueAtRow:(int)row column:(int)column {
+    NSAssert((row >= 0) && (row < 9), @"Row out of range (%d)", row);
+    NSAssert((column >= 0) && (column < 9), @"Column out of range (%d)", column);
     return _cells[row][column];
 }
 
 - (void)setValueAtRow:(int)row column:(int)column to:(int)value {
+    NSAssert((row >= 0) && (row < 9), @"Row out of range (%d)", row);
+    NSAssert((column >= 0) && (column < 9), @"Column out of range (%d)", column);
+    NSAssert((value >= 0) && (value <= 9), @"Value out of range (%d)", value);
     _cells[row][column] = value;
 }
 
 - (BOOL)isMutableAtRow:(int)row column:(int)column {
+    NSAssert((row >= 0) && (row < 9), @"Row out of range (%d)", row);
+    NSAssert((column >= 0) && (column < 9), @"Column out of range (%d)", column);
     return _isMutable[row][column];
 }
 
 - (BOOL)isConsistentAtRow:(int)row column:(int)column for:(int)value {
+    NSAssert((row >= 0) && (row < 9), @"Row out of range (%d)", row);
+    NSAssert((column >= 0) && (column < 9), @"Column out of range (%d)", column);
+    NSAssert((value > 0) && (value <= 9), @"Value out of range (%d)", value);
     // Check row for inconsistency
     for (int currentRow = 0; currentRow < 9; currentRow++) {
         if (currentRow != row && _cells[currentRow][column] == value) {
