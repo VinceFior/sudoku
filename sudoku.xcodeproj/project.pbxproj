@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		BF22B32919D0080800725BBA /* OCLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = BF22B32C19D0080800725BBA /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildPhases = (
+				BF22B32D19D0081500725BBA /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = OCLint;
+			productName = OCLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		A8326DD319C25C68003ACFB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8326DD219C25C68003ACFB5 /* Foundation.framework */; };
 		A8326DD519C25C68003ACFB5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8326DD419C25C68003ACFB5 /* CoreGraphics.framework */; };
@@ -218,6 +232,9 @@
 					A8326DEF19C25C68003ACFB5 = {
 						TestTargetID = A8326DCE19C25C68003ACFB5;
 					};
+					BF22B32919D0080800725BBA = {
+						CreatedOnToolsVersion = 6.0;
+					};
 				};
 			};
 			buildConfigurationList = A8326DCA19C25C67003ACFB5 /* Build configuration list for PBXProject "sudoku" */;
@@ -235,6 +252,7 @@
 			targets = (
 				A8326DCE19C25C68003ACFB5 /* sudoku */,
 				A8326DEF19C25C68003ACFB5 /* sudokuTests */,
+				BF22B32919D0080800725BBA /* OCLint */,
 			);
 		};
 /* End PBXProject section */
@@ -259,6 +277,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BF22B32D19D0081500725BBA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source ~/.bashrc\n\nhash oclint &> /dev/null\nif [ $? -eq 1 ]; then\necho >&2 \"oclint not found, analyzing stopped\"\nexit 1\nfi\n\n\ncd ${TARGET_TEMP_DIR}\nif [ ! -f compile_commands.json ]; then\necho \"[*] compile_commands.json not found, possibly clean was performed\"\necho \"[*] starting xcodebuild to rebuild the project..\"\n# clean previous output\nif [ -f xcodebuild.log ]; then\nrm xcodebuild.log\nfi\n\ncd ${SRCROOT}\nxcodebuild clean\n\n#build xcodebuild.log\nxcodebuild | tee ${TARGET_TEMP_DIR}/xcodebuild.log\n#xcodebuild <options>| tee ${TARGET_TEMP_DIR}/xcodebuild.log\n\necho \"[*] transforming xcodebuild.log into compile_commands.json...\"\ncd ${TARGET_TEMP_DIR}\n#transform it into compile_commands.json\noclint-xcodebuild\n\necho \"[*] copy compile_commands.json to the project root...\"\ncp ${TARGET_TEMP_DIR}/compile_commands.json ${SRCROOT}/compile_commands.json\nfi\n\necho \"[*] starting analyzing\"\ncd ${TARGET_TEMP_DIR}\noclint-json-compilation-database | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A8326DCB19C25C68003ACFB5 /* Sources */ = {
@@ -460,6 +494,20 @@
 			};
 			name = Release;
 		};
+		BF22B32A19D0080800725BBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BF22B32B19D0080800725BBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -489,6 +537,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		BF22B32C19D0080800725BBA /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF22B32A19D0080800725BBA /* Debug */,
+				BF22B32B19D0080800725BBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
