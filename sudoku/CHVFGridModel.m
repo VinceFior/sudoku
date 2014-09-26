@@ -14,26 +14,27 @@
 }
 
 - (void)generateGrid {
-    // For now, the grid is hardcoded
-    int grid[9][9]={
-        {7,0,0,4,2,0,0,0,9},
-        {0,0,9,5,0,0,0,0,4},
-        {0,2,0,6,9,0,5,0,0},
-        {6,5,0,0,0,0,4,3,0},
-        {0,8,0,0,0,6,0,0,7},
-        {0,1,0,0,4,5,6,0,0},
-        {0,0,0,8,6,0,0,0,2},
-        {3,4,0,9,0,0,1,0,0},
-        {8,0,0,3,0,2,7,4,0}
-    };
+    NSString *gridFileName = @"grid1";
+    NSString *gridFileDelimiter = @"\n";
+    NSString *emptyCellMarker = @".";
+    
+    NSString *gridFilePath = [[NSBundle mainBundle] pathForResource:gridFileName ofType:@"txt"];
+    NSError *error;
+    NSString *gridFileString = [[NSString alloc] initWithContentsOfFile:gridFilePath encoding:NSUTF8StringEncoding error:&error];
+    NSArray *grids = [gridFileString componentsSeparatedByString:gridFileDelimiter];
+    int gridIndex = arc4random_uniform((int) [grids count]);
+    NSString *gridString = [grids objectAtIndex:gridIndex];
+    NSAssert([gridString length] == 81, @"Grid not of length 81 (%d)", (int) [gridString length]);
     
     for (int row = 0; row < 9; row++) {
         for (int col = 0; col < 9; col++) {
-            int value = grid[row][col];
-            _cells[row][col] = value;
-            if (value == 0) {
+            int cellValueIndex = (row * 9) + col;
+            NSString *cellValueString = [gridString substringWithRange: NSMakeRange(cellValueIndex, 1)];
+            if ([cellValueString isEqualToString:emptyCellMarker]) {
+                _cells[row][col] = 0;
                 _isMutable[row][col] = YES;
             } else {
+                _cells[row][col] = [cellValueString intValue];
                 _isMutable[row][col] = NO;
             }
         }
