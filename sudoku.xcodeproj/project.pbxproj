@@ -39,6 +39,7 @@
 		BF1BA2E619D532A7004539F3 /* grid2.txt in Resources */ = {isa = PBXBuildFile; fileRef = BF1BA2E419D532A7004539F3 /* grid2.txt */; };
 		BF22B32519CF981900725BBA /* CHVFGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF22B32419CF981900725BBA /* CHVFGridModel.m */; };
 		BF22B32819CF9B1500725BBA /* CHVFNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF22B32719CF9B1500725BBA /* CHVFNumPadView.m */; };
+		BF8E8B9419D5E2D1001FDF4C /* CHVFGridGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8E8B9319D5E2D1001FDF4C /* CHVFGridGenerator.m */; };
 		BF9BF8EC19C377AB00AE16A7 /* CHVFGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9BF8EB19C377AB00AE16A7 /* CHVFGridView.m */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,8 @@
 		BF22B32419CF981900725BBA /* CHVFGridModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHVFGridModel.m; sourceTree = "<group>"; };
 		BF22B32619CF9B1500725BBA /* CHVFNumPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHVFNumPadView.h; sourceTree = "<group>"; };
 		BF22B32719CF9B1500725BBA /* CHVFNumPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHVFNumPadView.m; sourceTree = "<group>"; };
+		BF8E8B9219D5E2D1001FDF4C /* CHVFGridGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHVFGridGenerator.h; sourceTree = "<group>"; };
+		BF8E8B9319D5E2D1001FDF4C /* CHVFGridGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHVFGridGenerator.m; sourceTree = "<group>"; };
 		BF9BF8EA19C377AB00AE16A7 /* CHVFGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHVFGridView.h; sourceTree = "<group>"; };
 		BF9BF8EB19C377AB00AE16A7 /* CHVFGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHVFGridView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +155,8 @@
 				BF22B32419CF981900725BBA /* CHVFGridModel.m */,
 				BF22B32619CF9B1500725BBA /* CHVFNumPadView.h */,
 				BF22B32719CF9B1500725BBA /* CHVFNumPadView.m */,
+				BF8E8B9219D5E2D1001FDF4C /* CHVFGridGenerator.h */,
+				BF8E8B9319D5E2D1001FDF4C /* CHVFGridGenerator.m */,
 				A8326DEA19C25C68003ACFB5 /* Images.xcassets */,
 				A8326DD919C25C68003ACFB5 /* Supporting Files */,
 			);
@@ -307,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF8E8B9419D5E2D1001FDF4C /* CHVFGridGenerator.m in Sources */,
 				A8326DDF19C25C68003ACFB5 /* main.m in Sources */,
 				BF22B32519CF981900725BBA /* CHVFGridModel.m in Sources */,
 				BF9BF8EC19C377AB00AE16A7 /* CHVFGridView.m in Sources */,

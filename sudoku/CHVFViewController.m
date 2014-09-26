@@ -10,6 +10,7 @@
 #import "CHVFGridView.h"
 #import "CHVFGridModel.h"
 #import "CHVFNumPadView.h"
+#import "CHVFGridGenerator.h"
 
 @interface CHVFViewController () {
     CHVFGridView *_gridView;
@@ -24,6 +25,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSString *gridFileName = @"grid1";
+    NSString *gridFileDelimiter = @"\n";
+    NSString *emptyCellMarker = @".";
+    
     float gridFramePortion = 0.8;
     float gridNumPadSpacingPortion = 0.05;
     float numPadFrameHeightPortion = 0.1;
@@ -31,7 +36,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     _gridModel = [[CHVFGridModel alloc] init];
-    [_gridModel generateGrid];
+    [_gridModel initializeGridTo:[CHVFGridGenerator generateGrid:gridFileName
+        delimitedBy:gridFileDelimiter emptyCellAs:emptyCellMarker]];
     
     // Create grid frame
     CGRect frame = self.view.frame;

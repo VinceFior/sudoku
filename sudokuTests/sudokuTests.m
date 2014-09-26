@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "CHVFGridModel.h"
+#import "CHVFGridGenerator.h"
 
 @interface sudokuTests : XCTestCase {
     CHVFGridModel *_gridModel;
@@ -26,10 +27,33 @@
     [super tearDown];
 }
 
+- (void)testInitializeGridToWrongRowSize {
+    NSMutableArray *cells = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 9; i++) {
+        [cells addObject:[NSNumber numberWithInt:0]];
+    }
+    XCTAssertThrowsSpecific([_gridModel initializeGridTo:cells], NSException, @"Too few rows");
+}
+
+- (void)testInitializeGridToWrongColSize {
+    NSMutableArray *cells = [[NSMutableArray alloc] init];
+    for (int row = 0; row < 9; row++) {
+        NSMutableArray *cellsRow = [[NSMutableArray alloc] init];
+        for (int col = 0; col < 8; col++) {
+            [cellsRow addObject:[NSNumber numberWithInt:0]];
+        }
+        [cells addObject:cellsRow];
+    }
+    XCTAssertThrowsSpecific([_gridModel initializeGridTo:cells], NSException, @"Too few columns");
+}
+
 - (void)testGenerateGridHasNonZero {
-    // Note: This is not a "unit test", strictly speaking, since it calls
-    //       getValueAtRow:column: and generateGrid
-    [_gridModel generateGrid];
+    // Note: This is not a "unit test", strictly speaking, since it calls getValueAtRow:column:,
+    //       initializeGridTo:, and CHVFGridGenerator generateGrid
+    NSString *gridFileName = @"grid1";
+    NSString *gridFileDelimiter = @"\n";
+    NSString *emptyCellMarker = @".";
+    [_gridModel initializeGridTo:[CHVFGridGenerator generateGrid:gridFileName delimitedBy:gridFileDelimiter emptyCellAs:emptyCellMarker]];
     BOOL hasNonZero = NO;
     for (int row = 0; row < 9; row++) {
         for (int col = 0; col < 9; col++) {
@@ -42,9 +66,12 @@
 }
 
 - (void)testGenerateGridIsConsistent {
-    // Note: This is not a "unit test", strictly speaking, since it calls
-    //       getValueAtRow:column:, isConsistentAtRow:column:for:, and generateGrid
-    [_gridModel generateGrid];
+    // Note: This is not a "unit test", strictly speaking, since it calls getValueAtRow:column:,
+    //       isConsistentAtRow:column:for:, initializeGridTo:, and CHVFGridGenerator generateGrid
+    NSString *gridFileName = @"grid1";
+    NSString *gridFileDelimiter = @"\n";
+    NSString *emptyCellMarker = @".";
+    [_gridModel initializeGridTo:[CHVFGridGenerator generateGrid:gridFileName delimitedBy:gridFileDelimiter emptyCellAs:emptyCellMarker]];
     for (int row = 0; row < 9; row++) {
         for (int col = 0; col < 9; col++) {
             int value = [_gridModel getValueAtRow:row column:col];
@@ -87,9 +114,12 @@
 }
 
 - (void)testIsMutableForGeneratedGrid {
-    // Note: This is not a "unit test", strictly speaking, since it calls generateGrid,
-    //       getValueAtRow:column:, and isMutableAtRow:column:
-    [_gridModel generateGrid];
+    // Note: This is not a "unit test", strictly speaking, since it calls initializeGridTo:,
+    //       getValueAtRow:column:, isMutableAtRow:column:, and CHVFGridGenerator generateGrid
+    NSString *gridFileName = @"grid1";
+    NSString *gridFileDelimiter = @"\n";
+    NSString *emptyCellMarker = @".";
+    [_gridModel initializeGridTo:[CHVFGridGenerator generateGrid:gridFileName delimitedBy:gridFileDelimiter emptyCellAs:emptyCellMarker]];
     for (int row = 0; row < 9; row++) {
         for (int col = 0; col < 9; col++) {
             int value = [_gridModel getValueAtRow:row column:col];

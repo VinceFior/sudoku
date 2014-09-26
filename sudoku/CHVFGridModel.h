@@ -10,7 +10,7 @@
 
 @interface CHVFGridModel : NSObject
 
-- (void)generateGrid;
+- (void)initializeGridTo:(NSArray *)cells;
 - (int)getValueAtRow:(int)row column:(int)column;
 - (void)setValueAtRow:(int)row column:(int)column to:(int)value;
 - (BOOL)isMutableAtRow:(int)row column:(int)column;

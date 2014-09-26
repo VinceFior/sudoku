@@ -13,28 +13,19 @@
     BOOL _isMutable[9][9];
 }
 
-- (void)generateGrid {
-    NSString *gridFileName = @"grid1";
-    NSString *gridFileDelimiter = @"\n";
-    NSString *emptyCellMarker = @".";
-    
-    NSString *gridFilePath = [[NSBundle mainBundle] pathForResource:gridFileName ofType:@"txt"];
-    NSError *error;
-    NSString *gridFileString = [[NSString alloc] initWithContentsOfFile:gridFilePath encoding:NSUTF8StringEncoding error:&error];
-    NSArray *grids = [gridFileString componentsSeparatedByString:gridFileDelimiter];
-    int gridIndex = arc4random_uniform((int) [grids count]);
-    NSString *gridString = [grids objectAtIndex:gridIndex];
-    NSAssert([gridString length] == 81, @"Grid not of length 81 (%d)", (int) [gridString length]);
-    
+// initializeGridTo expects cells to be an NSArray of 9 NSArrays, each of which has 9 NSNumbers.
+// A value of 0 represents a blank grid cell.
+- (void)initializeGridTo:(NSArray *)cells {
+    NSAssert([cells count] == 9, @"Grid does not have 9 rows (%d)", (int) [cells count]);
     for (int row = 0; row < 9; row++) {
+        NSArray *rowArray = [cells objectAtIndex:(int) row];
+        NSAssert([rowArray count] == 9, @"Grid row does not have 9 columns (row %d, count %d)", row, (int) [rowArray count]);
         for (int col = 0; col < 9; col++) {
-            int cellValueIndex = (row * 9) + col;
-            NSString *cellValueString = [gridString substringWithRange: NSMakeRange(cellValueIndex, 1)];
-            if ([cellValueString isEqualToString:emptyCellMarker]) {
-                _cells[row][col] = 0;
+            int cellValue = [(NSNumber *) [rowArray objectAtIndex:col] intValue];
+            _cells[row][col] = cellValue;
+            if (cellValue == 0) {
                 _isMutable[row][col] = YES;
             } else {
-                _cells[row][col] = [cellValueString intValue];
                 _isMutable[row][col] = NO;
             }
         }
