@@ -137,7 +137,7 @@
     XCTAssertThrowsSpecific([_gridModel isConsistentAtRow:9 column:0 for:1], NSException, @"Row above max value");
     XCTAssertThrowsSpecific([_gridModel isConsistentAtRow:0 column:-1 for:1], NSException, @"Col below min value");
     XCTAssertThrowsSpecific([_gridModel isConsistentAtRow:0 column:9 for:1], NSException, @"Col above max value");
-    XCTAssertThrowsSpecific([_gridModel isConsistentAtRow:0 column:0 for:0], NSException, @"Value below min value");
+    XCTAssertThrowsSpecific([_gridModel isConsistentAtRow:0 column:0 for:-1], NSException, @"Value below min value");
     XCTAssertThrowsSpecific([_gridModel isConsistentAtRow:0 column:0 for:10], NSException, @"Value above max value");
 }
 

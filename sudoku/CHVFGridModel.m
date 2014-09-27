@@ -54,7 +54,11 @@
 - (BOOL)isConsistentAtRow:(int)row column:(int)column for:(int)value {
     NSAssert((row >= 0) && (row < 9), @"Row out of range (%d)", row);
     NSAssert((column >= 0) && (column < 9), @"Column out of range (%d)", column);
-    NSAssert((value > 0) && (value <= 9), @"Value out of range (%d)", value);
+    NSAssert((value >= 0) && (value <= 9), @"Value out of range (%d)", value);
+    // Since 0 represents blank, it's always valid
+    if (value == 0) {
+        return YES;
+    }
     // Check row for inconsistency
     for (int currentRow = 0; currentRow < 9; currentRow++) {
         if (currentRow != row && _cells[currentRow][column] == value) {
