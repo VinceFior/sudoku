@@ -11,6 +11,8 @@
 @interface CHVFNumPadView () {
     NSMutableArray* _cells;
     int _currentValue;
+    id _target;
+    SEL _action;
 }
 @end
 
@@ -43,9 +45,9 @@
             
             button.tag = i; // the tag is the number shown on the button
             button.backgroundColor = [UIColor whiteColor];
-            [button setBackgroundImage:[UIImage imageNamed:@"gray-highlight"] forState:UIControlStateHighlighted];
-            [button setBackgroundImage:[UIImage imageNamed:@"gray-highlight"] forState:UIControlStateHighlighted | UIControlStateSelected];
-            [button setBackgroundImage:[UIImage imageNamed:@"yellow-highlight"] forState:UIControlStateSelected];
+            [button setBackgroundImage:[UIImage imageNamed:@"numpad-pressed"] forState:UIControlStateHighlighted];
+            [button setBackgroundImage:[UIImage imageNamed:@"numpad-pressed"] forState:UIControlStateHighlighted | UIControlStateSelected];
+            [button setBackgroundImage:[UIImage imageNamed:@"numpad-selected"] forState:UIControlStateSelected];
             NSString* title = (i == 0) ? @"" : [NSString stringWithFormat:@"%d", i];
             [button setTitle:title forState:UIControlStateNormal];
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -64,8 +66,10 @@
 }
 
 - (void)cellSelected:(id)sender {
-    int tag = (int) [sender tag];
-    [self selectCell:tag];
+    int cellNumber = (int) [sender tag];
+    [self selectCell:cellNumber];
+    
+    [_target performSelector:_action];
 }
 
 - (void)selectCell:(int)cellNumber {
@@ -75,6 +79,11 @@
     _currentValue = cellNumber;
     UIButton *buttonToSelect = [_cells objectAtIndex:cellNumber];
     [buttonToSelect setSelected:YES];
+}
+
+- (void)setTarget:(id)target action:(SEL)action {
+    _target = target;
+    _action = action;
 }
 
 @end

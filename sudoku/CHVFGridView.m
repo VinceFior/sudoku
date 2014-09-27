@@ -59,8 +59,8 @@
                 UIButton* button = [[UIButton alloc] initWithFrame:buttonFrame];
                 
                 button.tag = row * 10 + col; // e.g.: for the cell of row 2 col 7, the tag is 27
-                button.backgroundColor = [UIColor whiteColor];
-                [button setBackgroundImage:[UIImage imageNamed:@"gray-highlight"] forState:UIControlStateHighlighted];
+                [button setBackgroundImage:[UIImage imageNamed:@"gridcell-neutral"] forState:UIControlStateNormal];
+                [button setBackgroundImage:[UIImage imageNamed:@"gridcell-pressed"] forState:UIControlStateHighlighted];
                 [button addTarget:self action:@selector(cellSelected:) forControlEvents:UIControlEventTouchUpInside];
                 
                 [self addSubview:button];
@@ -99,6 +99,18 @@
     int column = buttonTag % 10;
     [_target performSelector:_action withObject:[NSNumber numberWithInt:row] withObject:[NSNumber numberWithInt:column]];
 }
+
+- (void)setHintStateAtRow:(int)row column:(int)column to:(HintState)hintState {
+    UIButton *button = _cells[row][column];
+    if (hintState == HintStateNeutral) {
+        [button setBackgroundImage:[UIImage imageNamed:@"gridcell-neutral"] forState:UIControlStateNormal];
+    } else if (hintState == HintStateValid) {
+        [button setBackgroundImage:[UIImage imageNamed:@"gridcell-valid"] forState:UIControlStateNormal];
+    } else if (hintState == HintStateInvalid) {
+        [button setBackgroundImage:[UIImage imageNamed:@"gridcell-invalid"] forState:UIControlStateNormal];
+    }
+}
+
 
 - (void)setTarget:(id)target action:(SEL)action {
     _target = target;

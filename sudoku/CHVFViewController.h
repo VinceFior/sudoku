@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, DifficultyLevel) {
+    DifficultyLevelEasy,
+    DifficultyLevelMedium,
+    DifficultyLevelHard
+};
+
 @interface CHVFViewController : UIViewController
+
+@property DifficultyLevel difficultyLevel;
 
 @end

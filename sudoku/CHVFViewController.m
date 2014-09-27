@@ -25,19 +25,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *gridFileName = @"grid1";
-    NSString *gridFileDelimiter = @"\n";
-    NSString *emptyCellMarker = @".";
-    
     float gridFramePortion = 0.8;
     float gridNumPadSpacingPortion = 0.05;
     float numPadFrameHeightPortion = 0.1;
+    DifficultyLevel defaultDifficultyLevel = DifficultyLevelMedium;
 
     self.view.backgroundColor = [UIColor whiteColor];
     
     _gridModel = [[CHVFGridModel alloc] init];
-    [_gridModel initializeGridTo:[CHVFGridGenerator generateGrid:gridFileName
-        delimitedBy:gridFileDelimiter emptyCellAs:emptyCellMarker]];
     
     // Create grid frame
     CGRect frame = self.view.frame;
@@ -49,14 +44,7 @@
     
     // Initialize _gridView and set initial values from _gridModel
     _gridView = [[CHVFGridView alloc] initWithFrame:gridFrame];
-    for (int row = 0; row < 9; row++) {
-        for (int col = 0; col < 9; col++) {
-            int value = [_gridModel getValueAtRow:row column:col];
-            BOOL isMutable = (value == 0); // 0 means empty
-            [_gridView setMutableAtRow:row column:col to:isMutable];
-            [_gridView setValueAtRow:row column:col to:value];
-        }
-    }
+
     [self.view addSubview:_gridView];
     [_gridView setTarget:self action:@selector(gridCellSelectedAtRow:col:)];
     
@@ -68,7 +56,28 @@
     CGRect numPadFrame = CGRectMake(numPadFrameX, numPadFrameY, numPadFrameWidth, numPadFrameHeight);
     
     _numPadView = [[CHVFNumPadView alloc] initWithFrame:numPadFrame];
+    [_numPadView setTarget:self action:@selector(updateGridHighlighting)];
     [self.view addSubview:_numPadView];
+    
+    [self startGameForDifficulty:defaultDifficultyLevel];
+}
+
+- (void)startGameForDifficulty:(DifficultyLevel)difficultyLevel {
+    _difficultyLevel = difficultyLevel;
+    
+    NSString *gridFileName = @"grid1";
+    NSString *gridFileDelimiter = @"\n";
+    NSString *emptyCellMarker = @".";
+    [_gridModel initializeGridTo:[CHVFGridGenerator generateGrid:gridFileName
+        delimitedBy:gridFileDelimiter emptyCellAs:emptyCellMarker]];
+    for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++) {
+            int value = [_gridModel getValueAtRow:row column:col];
+            BOOL isMutable = (value == 0); // 0 means empty
+            [_gridView setMutableAtRow:row column:col to:isMutable];
+            [_gridView setValueAtRow:row column:col to:value];
+        }
+    }
 }
 
 - (void)gridCellSelectedAtRow:(NSNumber*)row col:(NSNumber*) col {
@@ -85,6 +94,40 @@
     
     [_gridView setValueAtRow:rowInt column:colInt to:currentValue];
     [_gridModel setValueAtRow:rowInt column:colInt to:currentValue];
+    [self updateGridHighlighting];
+}
+
+- (void)updateGridHighlighting {
+    int currentNumPadValue = [_numPadView getCurrentValue];
+    if (_difficultyLevel == DifficultyLevelEasy) {
+        // Highlight all valid grid cells for current value of num pad
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                int cellValue = [_gridModel getValueAtRow:row column:col];
+                BOOL isConsistent = [_gridModel isConsistentAtRow:row column:col for:currentNumPadValue];
+                BOOL isMutable = [_gridModel isMutableAtRow:row column:col];
+                if (isConsistent && isMutable && (currentNumPadValue != cellValue) && (currentNumPadValue != 0)) {
+                    [_gridView setHintStateAtRow:row column:col to:HintStateValid];
+                } else {
+                    [_gridView setHintStateAtRow:row column:col to:HintStateNeutral];
+                }
+            }
+        }
+    } else if (_difficultyLevel == DifficultyLevelMedium) {
+        // Highlight all grid cells that contain the current value of num pad
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                int cellValue = [_gridModel getValueAtRow:row column:col];
+                if ((cellValue == currentNumPadValue) && (currentNumPadValue != 0)) {
+                    [_gridView setHintStateAtRow:row column:col to:HintStateInvalid];
+                } else {
+                    [_gridView setHintStateAtRow:row column:col to:HintStateNeutral];
+                }
+            }
+        }
+    } else if (_difficultyLevel == DifficultyLevelHard) {
+        // Do nothing
+    }
 }
 
 - (void)didReceiveMemoryWarning {

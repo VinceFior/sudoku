@@ -11,5 +11,6 @@
 @interface CHVFNumPadView : UIView
 
 - (int)getCurrentValue;
+- (void)setTarget:(id)target action:(SEL)action;
 
 @end
