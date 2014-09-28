@@ -8,14 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class CHVFGridView;
+@class CHVFNumPadView;
+
 typedef NS_ENUM(NSInteger, DifficultyLevel) {
     DifficultyLevelEasy,
     DifficultyLevelMedium,
     DifficultyLevelHard
 };
 
-@interface CHVFViewController : UIViewController
+@interface CHVFGameViewController : UIViewController
 
-@property DifficultyLevel difficultyLevel;
+@property (nonatomic, weak) IBOutlet CHVFGridView *gridView;
+@property (nonatomic, weak) IBOutlet CHVFNumPadView *numPadView;
+
+- (void)startGameForDifficulty:(DifficultyLevel)difficultyLevel;
 
 @end

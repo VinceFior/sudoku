@@ -28,7 +28,7 @@
 		A8326DDF19C25C68003ACFB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A8326DDE19C25C68003ACFB5 /* main.m */; };
 		A8326DE319C25C68003ACFB5 /* CHVFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8326DE219C25C68003ACFB5 /* CHVFAppDelegate.m */; };
 		A8326DE619C25C68003ACFB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8326DE419C25C68003ACFB5 /* Main.storyboard */; };
-		A8326DE919C25C68003ACFB5 /* CHVFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8326DE819C25C68003ACFB5 /* CHVFViewController.m */; };
+		A8326DE919C25C68003ACFB5 /* CHVFGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8326DE819C25C68003ACFB5 /* CHVFGameViewController.m */; };
 		A8326DEB19C25C68003ACFB5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8326DEA19C25C68003ACFB5 /* Images.xcassets */; };
 		A8326DF219C25C68003ACFB5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8326DF119C25C68003ACFB5 /* XCTest.framework */; };
 		A8326DF319C25C68003ACFB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8326DD219C25C68003ACFB5 /* Foundation.framework */; };
@@ -40,6 +40,7 @@
 		BF22B32519CF981900725BBA /* CHVFGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF22B32419CF981900725BBA /* CHVFGridModel.m */; };
 		BF22B32819CF9B1500725BBA /* CHVFNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF22B32719CF9B1500725BBA /* CHVFNumPadView.m */; };
 		BF8E8B9419D5E2D1001FDF4C /* CHVFGridGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8E8B9319D5E2D1001FDF4C /* CHVFGridGenerator.m */; };
+		BF8E8B9B19D7B057001FDF4C /* CHVFMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8E8B9A19D7B057001FDF4C /* CHVFMenuViewController.m */; };
 		BF9BF8EC19C377AB00AE16A7 /* CHVFGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9BF8EB19C377AB00AE16A7 /* CHVFGridView.m */; };
 /* End PBXBuildFile section */
 
@@ -65,8 +66,8 @@
 		A8326DE119C25C68003ACFB5 /* CHVFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHVFAppDelegate.h; sourceTree = "<group>"; };
 		A8326DE219C25C68003ACFB5 /* CHVFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHVFAppDelegate.m; sourceTree = "<group>"; };
 		A8326DE519C25C68003ACFB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A8326DE719C25C68003ACFB5 /* CHVFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHVFViewController.h; sourceTree = "<group>"; };
-		A8326DE819C25C68003ACFB5 /* CHVFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHVFViewController.m; sourceTree = "<group>"; };
+		A8326DE719C25C68003ACFB5 /* CHVFGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHVFGameViewController.h; sourceTree = "<group>"; };
+		A8326DE819C25C68003ACFB5 /* CHVFGameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHVFGameViewController.m; sourceTree = "<group>"; };
 		A8326DEA19C25C68003ACFB5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A8326DF019C25C68003ACFB5 /* sudokuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sudokuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8326DF119C25C68003ACFB5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -81,6 +82,8 @@
 		BF22B32719CF9B1500725BBA /* CHVFNumPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHVFNumPadView.m; sourceTree = "<group>"; };
 		BF8E8B9219D5E2D1001FDF4C /* CHVFGridGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHVFGridGenerator.h; sourceTree = "<group>"; };
 		BF8E8B9319D5E2D1001FDF4C /* CHVFGridGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHVFGridGenerator.m; sourceTree = "<group>"; };
+		BF8E8B9919D7B057001FDF4C /* CHVFMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHVFMenuViewController.h; sourceTree = "<group>"; };
+		BF8E8B9A19D7B057001FDF4C /* CHVFMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHVFMenuViewController.m; sourceTree = "<group>"; };
 		BF9BF8EA19C377AB00AE16A7 /* CHVFGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHVFGridView.h; sourceTree = "<group>"; };
 		BF9BF8EB19C377AB00AE16A7 /* CHVFGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHVFGridView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,8 +150,10 @@
 				A8326DE119C25C68003ACFB5 /* CHVFAppDelegate.h */,
 				A8326DE219C25C68003ACFB5 /* CHVFAppDelegate.m */,
 				A8326DE419C25C68003ACFB5 /* Main.storyboard */,
-				A8326DE719C25C68003ACFB5 /* CHVFViewController.h */,
-				A8326DE819C25C68003ACFB5 /* CHVFViewController.m */,
+				BF8E8B9919D7B057001FDF4C /* CHVFMenuViewController.h */,
+				BF8E8B9A19D7B057001FDF4C /* CHVFMenuViewController.m */,
+				A8326DE719C25C68003ACFB5 /* CHVFGameViewController.h */,
+				A8326DE819C25C68003ACFB5 /* CHVFGameViewController.m */,
 				BF9BF8EA19C377AB00AE16A7 /* CHVFGridView.h */,
 				BF9BF8EB19C377AB00AE16A7 /* CHVFGridView.m */,
 				BF22B32319CF981900725BBA /* CHVFGridModel.h */,
@@ -318,7 +323,8 @@
 				BF9BF8EC19C377AB00AE16A7 /* CHVFGridView.m in Sources */,
 				A8326DE319C25C68003ACFB5 /* CHVFAppDelegate.m in Sources */,
 				BF22B32819CF9B1500725BBA /* CHVFNumPadView.m in Sources */,
-				A8326DE919C25C68003ACFB5 /* CHVFViewController.m in Sources */,
+				BF8E8B9B19D7B057001FDF4C /* CHVFMenuViewController.m in Sources */,
+				A8326DE919C25C68003ACFB5 /* CHVFGameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

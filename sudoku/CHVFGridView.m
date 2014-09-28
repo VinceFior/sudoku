@@ -17,8 +17,8 @@
 
 @implementation CHVFGridView
 
-- (id) initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (id) initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     
     float cellSeparatorPortion = 1 / 80.0;
     float blockSeparatorPortion = 1 / 40.0; // the additional width separations between blocks
@@ -26,8 +26,8 @@
     if (self) {
         self.backgroundColor = [UIColor blackColor];
         
-        float frameWidth = CGRectGetWidth(frame);
-        float frameHeight = CGRectGetHeight(frame);
+        float frameWidth = CGRectGetWidth(self.frame);
+        float frameHeight = CGRectGetHeight(self.frame);
         
         // Calculate the size of the spacing between cells and blocks
         CGFloat cellSeparatorWidth = frameWidth * cellSeparatorPortion;

@@ -18,16 +18,15 @@
 
 @implementation CHVFNumPadView
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     
     float cellSeparatorPortion = 1 / 40.0;
-    int defaultSelectedCellNumber = 0;
     
     if (self) {
         self.backgroundColor = [UIColor blackColor];
-        float frameWidth = CGRectGetWidth(frame);
-        float frameHeight = CGRectGetHeight(frame);
+        float frameWidth = CGRectGetWidth(self.frame);
+        float frameHeight = CGRectGetHeight(self.frame);
         
         CGFloat cellSeparatorWidth = frameWidth * cellSeparatorPortion;
         
@@ -56,9 +55,14 @@
             [self addSubview:button];
             [_cells addObject:button];
         }
-        [self selectCell:defaultSelectedCellNumber];
+        [self resetCurrentValue];
     }
     return self;
+}
+
+- (void)resetCurrentValue {
+    int defaultSelectedCellNumber = 0;
+    [self selectCell:defaultSelectedCellNumber];
 }
 
 - (int)getCurrentValue {
