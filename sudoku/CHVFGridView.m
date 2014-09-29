@@ -20,11 +20,12 @@
 - (id) initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
+    UIColor *backgroundColor = [UIColor colorWithRed:226.0/255 green:188.0/255 blue:250.0/255 alpha:1.0];
     float cellSeparatorPortion = 1 / 80.0;
     float blockSeparatorPortion = 1 / 40.0; // the additional width separations between blocks
     
     if (self) {
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = backgroundColor;
         
         float frameWidth = CGRectGetWidth(self.frame);
         float frameHeight = CGRectGetHeight(self.frame);
@@ -74,11 +75,13 @@
 }
 
 - (void)setMutableAtRow:(int)row column:(int)column to:(BOOL)isMutable {
+    UIColor *mutableTitleColor = [UIColor blackColor];
+    UIColor *immutableTitleColor = [UIColor colorWithRed:161.0/255 green:134.0/255 blue:179.0/255 alpha:1.0];
     UIButton *button = _cells[row][column];
     if (isMutable) {
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:mutableTitleColor forState:UIControlStateNormal];
     } else {
-        [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [button setTitleColor:immutableTitleColor forState:UIControlStateNormal];
     }
 }
 

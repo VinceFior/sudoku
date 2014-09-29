@@ -21,10 +21,11 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
-    float cellSeparatorPortion = 1 / 40.0;
+    UIColor *backgroundColor = [UIColor colorWithRed:226.0/255 green:188.0/255 blue:250.0/255 alpha:1.0];
+    float cellSeparatorPortion = 1 / 50.0;
     
     if (self) {
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = backgroundColor;
         float frameWidth = CGRectGetWidth(self.frame);
         float frameHeight = CGRectGetHeight(self.frame);
         
