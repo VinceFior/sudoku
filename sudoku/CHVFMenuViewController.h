@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CHVFMenuViewController : UIViewController
+@interface CHVFMenuViewController : UIViewController<UIAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIButton *resumeButton;
 
