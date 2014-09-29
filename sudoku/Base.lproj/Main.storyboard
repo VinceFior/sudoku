@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -70,16 +71,33 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
                             </view>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fUb-26-Cbh">
+                                <rect key="frame" x="60" y="66" width="648" height="703"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wov-Xp-dMD">
+                                        <rect key="frame" x="288" y="320" width="73" height="30"/>
+                                        <state key="normal" title="Play Again">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="V1V-aU-gLy" kind="modal" id="UtP-WE-eXh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="gTV-zM-3eT"/>
                     <connections>
                         <outlet property="gridView" destination="irV-Gs-XZK" id="PpT-wr-mNk"/>
+                        <outlet property="menuButton" destination="Jmu-sF-Z7H" id="0kp-fi-Rv8"/>
                         <outlet property="numPadView" destination="MnC-rt-xrq" id="HG9-r8-0MF"/>
                         <outlet property="pauseButton" destination="GeV-4S-tE0" id="myT-fe-nQA"/>
                         <outlet property="pauseOverlay" destination="7b7-h8-5TN" id="J0s-xf-4Pq"/>
                         <outlet property="timerLabel" destination="ISZ-FL-7u5" id="cED-9u-0qy"/>
+                        <outlet property="wonOverlay" destination="fUb-26-Cbh" id="Ps7-nN-3H3"/>
                         <segue destination="V1V-aU-gLy" kind="modal" identifier="GameToMenuSegueNoAnimation" animates="NO" id="zzF-JU-Cjy"/>
                     </connections>
                 </viewController>

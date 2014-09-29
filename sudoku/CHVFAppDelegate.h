@@ -11,6 +11,5 @@
 @interface CHVFAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property BOOL gameStarted;
 
 @end

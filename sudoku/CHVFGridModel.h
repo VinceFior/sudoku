@@ -15,5 +15,6 @@
 - (void)setValueAtRow:(int)row column:(int)column to:(int)value;
 - (BOOL)isMutableAtRow:(int)row column:(int)column;
 - (BOOL)isConsistentAtRow:(int)row column:(int)column for:(int)value;
+- (BOOL)isGridSolved;
 
 @end

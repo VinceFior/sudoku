@@ -39,8 +39,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CHVFAppDelegate *appDelegate = (CHVFAppDelegate *) [[UIApplication sharedApplication] delegate];
-    if (!appDelegate.gameStarted) {
+    CHVFGameViewController *gameViewController = (CHVFGameViewController *) self.presentingViewController;
+    if (!gameViewController.gameRunning) {
         self.resumeButton.hidden = YES;
     }
 }

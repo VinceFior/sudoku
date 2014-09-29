@@ -173,4 +173,70 @@
     XCTAssertTrue([_gridModel isConsistentAtRow:3 column:3 for:value]);
 }
 
+- (void)testIsGridSolvedWithSolvedGrid {
+    // Note: This is not a "unit test", strictly speaking, since it calls
+    //       setValueAtRow:column:to
+    int solvedGrid[9][9]={
+        {1,2,3,4,5,6,7,8,9},
+        {4,5,6,7,8,9,1,2,3},
+        {7,8,9,1,2,3,4,5,6},
+        {2,3,4,5,6,7,8,9,1},
+        {5,6,7,8,9,1,2,3,4},
+        {8,9,1,2,3,4,5,6,7},
+        {3,4,5,6,7,8,9,1,2},
+        {6,7,8,9,1,2,3,4,5},
+        {9,1,2,3,4,5,6,7,8}
+    };
+    for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++) {
+            [_gridModel setValueAtRow:row column:col to:solvedGrid[row][col]];
+        }
+    }
+    XCTAssertTrue([_gridModel isGridSolved]);
+}
+
+- (void)testIsGridSolvedWithInconsistentGrid {
+    // Note: This is not a "unit test", strictly speaking, since it calls
+    //       setValueAtRow:column:to
+    int inconsistentGrid[9][9]={
+        {1,2,3,4,5,6,7,8,9},
+        {4,5,6,7,8,9,1,2,3},
+        {7,8,9,1,2,3,4,5,6},
+        {2,3,4,5,6,7,8,9,1},
+        {5,6,7,8,9,1,2,3,4},
+        {8,9,1,2,3,4,5,6,7},
+        {3,4,5,6,7,8,9,1,2},
+        {6,7,8,9,1,2,3,4,5},
+        {9,1,2,3,4,5,6,7,1}
+    }; // last cell is inconsistent (should be 8)
+    for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++) {
+            [_gridModel setValueAtRow:row column:col to:inconsistentGrid[row][col]];
+        }
+    }
+    XCTAssertFalse([_gridModel isGridSolved]);
+}
+
+- (void)testIsGridSolvedWithIncompleteGrid {
+    // Note: This is not a "unit test", strictly speaking, since it calls
+    //       setValueAtRow:column:to
+    int incompleteGrid[9][9]={
+        {1,2,3,4,5,6,7,8,9},
+        {4,5,6,7,8,9,1,2,3},
+        {7,8,9,1,2,3,4,5,6},
+        {2,3,4,5,6,7,8,9,1},
+        {5,6,7,8,9,1,2,3,4},
+        {8,9,1,2,3,4,5,6,7},
+        {3,4,5,6,7,8,9,1,2},
+        {6,7,8,9,1,2,3,4,5},
+        {9,1,2,3,4,5,6,7,0}
+    }; // last cell is empty
+    for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++) {
+            [_gridModel setValueAtRow:row column:col to:incompleteGrid[row][col]];
+        }
+    }
+    XCTAssertFalse([_gridModel isGridSolved]);
+}
+
 @end

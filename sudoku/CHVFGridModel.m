@@ -87,4 +87,16 @@
     return YES;
 }
 
+- (BOOL)isGridSolved {
+    for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++) {
+            int cellValue = _cells[row][col];
+            if (![self isConsistentAtRow:row column:col for:cellValue] || cellValue == 0) {
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+
 @end

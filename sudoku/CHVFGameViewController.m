@@ -48,19 +48,16 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
     [self.gridView setTarget:self action:@selector(gridCellSelectedAtRow:col:)];
     [self.numPadView setTarget:self action:@selector(updateGridHighlighting)];
     
-    CHVFAppDelegate *appDelegate = (CHVFAppDelegate *) [[UIApplication sharedApplication] delegate];
-    if (!appDelegate.gameStarted) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self performSegueWithIdentifier:@"GameToMenuSegueNoAnimation" sender:self];
-        });
-    }
+    self.gameRunning = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSegueWithIdentifier:@"GameToMenuSegueNoAnimation" sender:self];
+    });
 }
 
 - (void)startGameForDifficulty:(DifficultyLevel)difficultyLevel {
     self.difficultyLevel = difficultyLevel;
     
-    CHVFAppDelegate *appDelegate = (CHVFAppDelegate *) [[UIApplication sharedApplication] delegate];
-    appDelegate.gameStarted = YES;
+    self.gameRunning = YES;
     
     NSString *gridFileName = @"grid1";
     NSString *gridFileDelimiter = @"\n";
@@ -78,6 +75,7 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
     
     [self.numPadView resetCurrentValue];
     [self updateGridHighlighting];
+    [self setWonOverlayVisible:NO];
     [self setPauseOverlayVisible:NO];
     [self resetGameTimer];
 }
@@ -97,6 +95,12 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
     [self.gridView setValueAtRow:rowInt column:colInt to:currentValue];
     [self.gridModel setValueAtRow:rowInt column:colInt to:currentValue];
     [self updateGridHighlighting];
+    
+    if ([_gridModel isGridSolved]) {
+        [self setWonOverlayVisible:YES];
+        [self pauseGameTimer];
+        self.gameRunning = NO;
+    }
 }
 
 - (void)updateGridHighlighting {
@@ -135,6 +139,13 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
             }
         }
     }
+}
+
+- (void)setWonOverlayVisible:(BOOL)isVisible {
+    self.wonOverlay.userInteractionEnabled = isVisible;
+    self.wonOverlay.hidden = !isVisible;
+    self.pauseButton.enabled = !isVisible;
+    self.menuButton.enabled = !isVisible;
 }
 
 - (void)setPauseOverlayVisible:(BOOL)isVisible {
