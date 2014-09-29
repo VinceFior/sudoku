@@ -17,10 +17,29 @@
 
 @property DifficultyLevel difficultyLevel;
 @property CHVFGridModel *gridModel;
+@property NSTimer *gameTimer;
+@property NSTimeInterval gameTimeElapsed;
 
 @end
 
 @implementation CHVFGameViewController
+
+const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
+
+- (IBAction)pauseButtonPressed {
+    [self setPauseOverlayVisible:YES];
+    [self pauseGameTimer];
+}
+
+- (IBAction)resumeButtonPressed {
+    [self setPauseOverlayVisible:NO];
+    [self resumeGameTimer];
+}
+
+- (IBAction)menuButtonPressed {
+    [self setPauseOverlayVisible:YES];
+    [self pauseGameTimer];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,7 +48,7 @@
     [self.gridView setTarget:self action:@selector(gridCellSelectedAtRow:col:)];
     [self.numPadView setTarget:self action:@selector(updateGridHighlighting)];
     
-    CHVFAppDelegate *appDelegate = (CHVFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    CHVFAppDelegate *appDelegate = (CHVFAppDelegate *) [[UIApplication sharedApplication] delegate];
     if (!appDelegate.gameStarted) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"GameToMenuSegueNoAnimation" sender:self];
@@ -40,7 +59,7 @@
 - (void)startGameForDifficulty:(DifficultyLevel)difficultyLevel {
     self.difficultyLevel = difficultyLevel;
     
-    CHVFAppDelegate *appDelegate = (CHVFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    CHVFAppDelegate *appDelegate = (CHVFAppDelegate *) [[UIApplication sharedApplication] delegate];
     appDelegate.gameStarted = YES;
     
     NSString *gridFileName = @"grid1";
@@ -58,6 +77,9 @@
     }
     
     [self.numPadView resetCurrentValue];
+    [self updateGridHighlighting];
+    [self setPauseOverlayVisible:NO];
+    [self resetGameTimer];
 }
 
 - (void)gridCellSelectedAtRow:(NSNumber*)row col:(NSNumber*) col {
@@ -106,13 +128,84 @@
             }
         }
     } else if (self.difficultyLevel == DifficultyLevelHard) {
-        // Do nothing
+        // Set all grid cells to neutral highlight state
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                [self.gridView setHintStateAtRow:row column:col to:HintStateNeutral];
+            }
+        }
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setPauseOverlayVisible:(BOOL)isVisible {
+    self.pauseOverlay.userInteractionEnabled = isVisible;
+    self.pauseOverlay.hidden = !isVisible;
+    self.pauseButton.enabled = !isVisible;
+}
+
+- (void)resetGameTimer {
+    if (self.gameTimer != nil) {
+        [self.gameTimer invalidate];
+        self.gameTimer = nil;
+    }
+    self.gameTimeElapsed = 0;
+    [self startGameTimer];
+}
+
+- (void)updateTimerDisplay:(NSTimer *)timer {
+    self.gameTimeElapsed += TIMER_UPDATE_INTERVAL;
+    self.timerLabel.text = [CHVFGameViewController timerFormattedStringFromSeconds:self.gameTimeElapsed];
+}
+
+- (void)pauseGameTimer {
+    if (self.gameTimer == nil) {
+        return;
+    }
+    // When we pause, we calculate the portion of a second that has elapsed since we last updated gameTimeElapsed.
+    // We increment gameTimeElapsed by this time interval. Otherwise, this split-second would be lost.
+    NSDate *nextFireDate = [self.gameTimer fireDate];
+    NSTimeInterval timeUntilNextFireDate = [nextFireDate timeIntervalSinceNow];
+    NSTimeInterval timeElapsed = TIMER_UPDATE_INTERVAL - timeUntilNextFireDate;
+    self.gameTimeElapsed += timeElapsed;
+    
+    [self.gameTimer invalidate];
+    self.gameTimer = nil;
+    
+    self.timerLabel.text = [CHVFGameViewController timerFormattedStringFromSeconds:self.gameTimeElapsed];
+}
+
+- (void)resumeGameTimer {
+    // We calculate the time interval remaining until the gameTimer gets to the next whole second.
+    // After that time interval, we start a repeating timer to update every second.
+    NSTimeInterval timeUntilNextSecond = TIMER_UPDATE_INTERVAL - fmod(self.gameTimeElapsed, TIMER_UPDATE_INTERVAL);
+    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:timeUntilNextSecond target:self
+        selector:@selector(updateGameTimeElapsedAndStartGameTimer:) userInfo:[NSNumber numberWithDouble:timeUntilNextSecond] repeats:NO];
+}
+
+- (void)updateGameTimeElapsedAndStartGameTimer:(NSTimer *)timer {
+    // This method assumes that the given timer has an NSNumber userInfo that represents
+    // the time interval since gameTimeElapsed was last updated.
+    NSTimeInterval timeElapsed = [((NSNumber *) [timer userInfo]) doubleValue];
+    self.gameTimeElapsed += timeElapsed;
+    [self startGameTimer];
+}
+
+- (void)startGameTimer {
+    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:TIMER_UPDATE_INTERVAL target:self
+        selector:@selector(updateTimerDisplay:) userInfo:nil repeats:YES];
+    self.timerLabel.text = [CHVFGameViewController timerFormattedStringFromSeconds:self.gameTimeElapsed];
+}
+
++ (NSString *)timerFormattedStringFromSeconds:(NSTimeInterval)timeInterval {
+    // If the timer is too big to show, display the largest time possible, which is 99 hours, 59 minutes, and 59 seconds
+    NSTimeInterval maxTime = (99 * (60 * 60)) + (59 * (60)) + 59;
+    if (timeInterval > maxTime) {
+        return @"99:59:59";
+    }
+    NSInteger hours = timeInterval / (60 * 60);
+    NSInteger minutes = ((int) (timeInterval / 60)) % 60;
+    NSInteger seconds = ((int) timeInterval) % 60;
+    return [NSString stringWithFormat:@"%02li:%02li:%02li", hours, minutes, seconds];
 }
 
 @end

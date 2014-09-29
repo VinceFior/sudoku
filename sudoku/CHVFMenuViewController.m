@@ -16,15 +16,6 @@
 
 @implementation CHVFMenuViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    CHVFAppDelegate *appDelegate = (CHVFAppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (!appDelegate.gameStarted) {
-        self.resumeButton.hidden = YES;
-    }
-}
-
 - (IBAction)startNewGame:(id)sender {
     NSInteger difficultyTag = [sender tag];
     
@@ -43,6 +34,15 @@
 
 - (IBAction)closeMenu {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    CHVFAppDelegate *appDelegate = (CHVFAppDelegate *) [[UIApplication sharedApplication] delegate];
+    if (!appDelegate.gameStarted) {
+        self.resumeButton.hidden = YES;
+    }
 }
 
 @end

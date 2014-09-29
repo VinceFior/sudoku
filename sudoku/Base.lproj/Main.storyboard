@@ -27,6 +27,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="menuButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="nn5-IU-7ch"/>
                                     <segue destination="V1V-aU-gLy" kind="modal" identifier="" id="wCd-aD-Wze"/>
                                 </connections>
                             </button>
@@ -38,8 +39,8 @@
                                 <rect key="frame" x="84" y="800" width="367" height="183"/>
                                 <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISZ-FL-7u5">
-                                <rect key="frame" x="501" y="832" width="153" height="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISZ-FL-7u5">
+                                <rect key="frame" x="481" y="826" width="183" height="55"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -50,7 +51,25 @@
                                 <state key="normal" title="Pause">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pauseButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="d1i-TR-nY8"/>
+                                </connections>
                             </button>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7b7-h8-5TN">
+                                <rect key="frame" x="60" y="66" width="648" height="703"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFy-lU-eKk">
+                                        <rect key="frame" x="296" y="287" width="56" height="30"/>
+                                        <state key="normal" title="Resume">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="resumeButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="bn1-bq-ApM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -58,6 +77,9 @@
                     <connections>
                         <outlet property="gridView" destination="irV-Gs-XZK" id="PpT-wr-mNk"/>
                         <outlet property="numPadView" destination="MnC-rt-xrq" id="HG9-r8-0MF"/>
+                        <outlet property="pauseButton" destination="GeV-4S-tE0" id="myT-fe-nQA"/>
+                        <outlet property="pauseOverlay" destination="7b7-h8-5TN" id="J0s-xf-4Pq"/>
+                        <outlet property="timerLabel" destination="ISZ-FL-7u5" id="cED-9u-0qy"/>
                         <segue destination="V1V-aU-gLy" kind="modal" identifier="GameToMenuSegueNoAnimation" animates="NO" id="zzF-JU-Cjy"/>
                     </connections>
                 </viewController>

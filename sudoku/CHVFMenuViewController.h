@@ -11,6 +11,8 @@
 @interface CHVFMenuViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet UIButton *resumeButton;
+
+- (IBAction)startNewGame:(id)sender;
 - (IBAction)closeMenu;
 
 @end

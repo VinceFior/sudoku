@@ -21,6 +21,13 @@ typedef NS_ENUM(NSInteger, DifficultyLevel) {
 
 @property (nonatomic, weak) IBOutlet CHVFGridView *gridView;
 @property (nonatomic, weak) IBOutlet CHVFNumPadView *numPadView;
+@property (nonatomic, weak) IBOutlet UILabel *timerLabel;
+@property (nonatomic, weak) IBOutlet UIView *pauseOverlay;
+@property (nonatomic, weak) IBOutlet UIButton *pauseButton;
+
+- (IBAction)pauseButtonPressed;
+- (IBAction)resumeButtonPressed;
+- (IBAction)menuButtonPressed;
 
 - (void)startGameForDifficulty:(DifficultyLevel)difficultyLevel;
 
