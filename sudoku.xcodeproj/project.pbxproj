@@ -253,7 +253,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A8326DCA19C25C67003ACFB5 /* Build configuration list for PBXProject "sudoku" */;
+			buildConfigurationList = A8326DCA19C25C67003ACFB5 /* Build configuration list for PBXProject "Sudoku" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -531,7 +531,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A8326DCA19C25C67003ACFB5 /* Build configuration list for PBXProject "sudoku" */ = {
+		A8326DCA19C25C67003ACFB5 /* Build configuration list for PBXProject "Sudoku" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A8326DFF19C25C68003ACFB5 /* Debug */,

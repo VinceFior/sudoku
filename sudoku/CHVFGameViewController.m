@@ -213,10 +213,10 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
     if (timeInterval > maxTime) {
         return @"99:59:59";
     }
-    NSInteger hours = timeInterval / (60 * 60);
-    NSInteger minutes = ((int) (timeInterval / 60)) % 60;
-    NSInteger seconds = ((int) timeInterval) % 60;
-    return [NSString stringWithFormat:@"%02li:%02li:%02li", hours, minutes, seconds];
+    int hours = timeInterval / (60 * 60);
+    int minutes = ((int) (timeInterval / 60)) % 60;
+    int seconds = ((int) timeInterval) % 60;
+    return [NSString stringWithFormat:@"%02i:%02i:%02i", hours, minutes, seconds];
 }
 
 @end
