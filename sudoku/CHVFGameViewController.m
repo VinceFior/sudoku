@@ -166,7 +166,6 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
     self.wonOverlay.userInteractionEnabled = isVisible;
     self.wonOverlay.hidden = !isVisible;
     self.pauseButton.enabled = !isVisible;
-    self.menuButton.enabled = !isVisible;
 }
 
 - (void)setPauseOverlayVisible:(BOOL)isVisible {
