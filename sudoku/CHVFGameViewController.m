@@ -29,8 +29,7 @@
 const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
 
 - (IBAction)pauseButtonPressed {
-    [self setPauseOverlayVisible:YES];
-    [self pauseGameTimer];
+    [self pauseAndShowOverlay];
 }
 
 - (IBAction)resumeButtonPressed {
@@ -39,6 +38,14 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
 }
 
 - (IBAction)menuButtonPressed {
+    [self pauseAndShowOverlay];
+}
+
+- (void)pauseAndShowOverlay {
+    // If the game is not running (e.g. the game has just been won), there is no game to pause
+    if (!self.gameRunning) {
+        return;
+    }
     [self setPauseOverlayVisible:YES];
     [self pauseGameTimer];
 }
