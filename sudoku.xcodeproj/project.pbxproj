@@ -35,6 +35,7 @@
 		A8326DF419C25C68003ACFB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8326DD619C25C68003ACFB5 /* UIKit.framework */; };
 		A8326DFC19C25C68003ACFB5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8326DFA19C25C68003ACFB5 /* InfoPlist.strings */; };
 		A8326DFE19C25C68003ACFB5 /* sudokuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A8326DFD19C25C68003ACFB5 /* sudokuTests.m */; };
+		BF110B9A19DAB189008CB039 /* tile1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF110B9819DAB189008CB039 /* tile1.mp3 */; };
 		BF1BA2E519D532A7004539F3 /* grid1.txt in Resources */ = {isa = PBXBuildFile; fileRef = BF1BA2E319D532A7004539F3 /* grid1.txt */; };
 		BF1BA2E619D532A7004539F3 /* grid2.txt in Resources */ = {isa = PBXBuildFile; fileRef = BF1BA2E419D532A7004539F3 /* grid2.txt */; };
 		BF22B32519CF981900725BBA /* CHVFGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF22B32419CF981900725BBA /* CHVFGridModel.m */; };
@@ -74,6 +75,7 @@
 		A8326DF919C25C68003ACFB5 /* sudokuTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sudokuTests-Info.plist"; sourceTree = "<group>"; };
 		A8326DFB19C25C68003ACFB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A8326DFD19C25C68003ACFB5 /* sudokuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sudokuTests.m; sourceTree = "<group>"; };
+		BF110B9819DAB189008CB039 /* tile1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tile1.mp3; sourceTree = "<group>"; };
 		BF1BA2E319D532A7004539F3 /* grid1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid1.txt; sourceTree = "<group>"; };
 		BF1BA2E419D532A7004539F3 /* grid2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid2.txt; sourceTree = "<group>"; };
 		BF22B32319CF981900725BBA /* CHVFGridModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHVFGridModel.h; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		A8326DD819C25C68003ACFB5 /* sudoku */ = {
 			isa = PBXGroup;
 			children = (
+				BF110B9819DAB189008CB039 /* tile1.mp3 */,
 				BF1BA2E319D532A7004539F3 /* grid1.txt */,
 				BF1BA2E419D532A7004539F3 /* grid2.txt */,
 				A8326DE119C25C68003ACFB5 /* CHVFAppDelegate.h */,
@@ -282,6 +285,7 @@
 				A8326DDD19C25C68003ACFB5 /* InfoPlist.strings in Resources */,
 				BF1BA2E519D532A7004539F3 /* grid1.txt in Resources */,
 				A8326DE619C25C68003ACFB5 /* Main.storyboard in Resources */,
+				BF110B9A19DAB189008CB039 /* tile1.mp3 in Resources */,
 				BF1BA2E619D532A7004539F3 /* grid2.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
