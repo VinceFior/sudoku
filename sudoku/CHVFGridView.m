@@ -22,7 +22,7 @@
     
     UIColor *backgroundColor = [UIColor colorWithRed:226.0/255 green:188.0/255 blue:250.0/255 alpha:1.0];
     float cellSeparatorPortion = 1 / 80.0;
-    float blockSeparatorPortion = 1 / 40.0; // the additional width separations between blocks
+    float blockSeparatorPortion = 1 / 60.0; // the additional width separations between blocks
     
     if (self) {
         self.backgroundColor = backgroundColor;
@@ -76,8 +76,13 @@
 
 - (void)setMutableAtRow:(int)row column:(int)column to:(BOOL)isMutable {
     UIColor *mutableTitleColor = [UIColor blackColor];
-    UIColor *immutableTitleColor = [UIColor colorWithRed:161.0/255 green:134.0/255 blue:179.0/255 alpha:1.0];
+    UIColor *immutableTitleColor = [UIColor colorWithRed:120.0/255 green:115.0/255 blue:135.0/255 alpha:1.0];
+    UIColor *shadowColor = [UIColor whiteColor];
+    CGSize shadowSize = CGSizeMake(0.0, 1.0);
+    
     UIButton *button = _cells[row][column];
+    [button setTitleShadowColor:shadowColor forState:UIControlStateNormal];
+    button.titleLabel.shadowOffset = shadowSize;
     if (isMutable) {
         [button setTitleColor:mutableTitleColor forState:UIControlStateNormal];
     } else {

@@ -44,7 +44,7 @@
             UIButton* button = [[UIButton alloc] initWithFrame:buttonFrame];
             
             button.tag = i; // the tag is the number shown on the button
-            button.backgroundColor = [UIColor whiteColor];
+            [button setBackgroundImage:[UIImage imageNamed:@"numpad-neutral"] forState:UIControlStateNormal];
             [button setBackgroundImage:[UIImage imageNamed:@"numpad-pressed"] forState:UIControlStateHighlighted];
             [button setBackgroundImage:[UIImage imageNamed:@"numpad-pressed"] forState:UIControlStateHighlighted | UIControlStateSelected];
             [button setBackgroundImage:[UIImage imageNamed:@"numpad-selected"] forState:UIControlStateSelected];

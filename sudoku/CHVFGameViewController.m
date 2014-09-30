@@ -44,6 +44,10 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIColor *pauseButtonDisableColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5];
+    
+    [self.pauseButton setTitleColor:pauseButtonDisableColor forState:UIControlStateDisabled];
+    
     self.gridModel = [[CHVFGridModel alloc] init];
     [self.gridView setTarget:self action:@selector(gridCellSelectedAtRow:col:)];
     [self.numPadView setTarget:self action:@selector(updateGridHighlighting)];
