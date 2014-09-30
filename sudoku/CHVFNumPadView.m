@@ -9,7 +9,7 @@
 #import "CHVFNumPadView.h"
 
 @interface CHVFNumPadView () {
-    NSMutableArray* _cells;
+    NSMutableArray *_cells;
     int _currentValue;
     id _target;
     SEL _action;
