@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, DifficultyLevel) {
 @property (nonatomic, weak) IBOutlet UIView *pauseOverlay;
 @property (nonatomic, weak) IBOutlet UIButton *pauseButton;
 @property (nonatomic, weak) IBOutlet UIButton *menuButton;
+@property (nonatomic, weak) IBOutlet UIImageView *menuScreenshot;
 
 - (IBAction)pauseButtonPressed;
 - (IBAction)resumeButtonPressed;

@@ -64,8 +64,11 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
     [self setUpTileSound];
     
     self.gameRunning = NO;
+    // To smooth the segue, we temporarily overlay a screenshot of the menu
+    self.menuScreenshot.hidden = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self performSegueWithIdentifier:@"GameToMenuSegueNoAnimation" sender:self];
+        self.menuScreenshot.hidden = YES;
     });
 }
 
