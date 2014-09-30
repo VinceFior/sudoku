@@ -12,6 +12,7 @@
 #import "CHVFNumPadView.h"
 #import "CHVFGridGenerator.h"
 #import "CHVFAppDelegate.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface CHVFGameViewController ()
 
@@ -19,6 +20,7 @@
 @property CHVFGridModel *gridModel;
 @property NSTimer *gameTimer;
 @property NSTimeInterval gameTimeElapsed;
+@property AVAudioPlayer *tileAudioPlayer;
 
 @end
 
@@ -51,6 +53,8 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
     self.gridModel = [[CHVFGridModel alloc] init];
     [self.gridView setTarget:self action:@selector(gridCellSelectedAtRow:col:)];
     [self.numPadView setTarget:self action:@selector(updateGridHighlighting)];
+    
+    [self setUpTileSound];
     
     self.gameRunning = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -100,11 +104,24 @@ const NSTimeInterval TIMER_UPDATE_INTERVAL = 1.0;
     [self.gridModel setValueAtRow:rowInt column:colInt to:currentValue];
     [self updateGridHighlighting];
     
+    [self playTileSound];
+    
     if ([_gridModel isGridSolved]) {
         [self setWonOverlayVisible:YES];
         [self pauseGameTimer];
         self.gameRunning = NO;
     }
+}
+
+- (void)setUpTileSound {
+    NSString *tileSoundFileName = @"tile1.mp3";
+    NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], tileSoundFileName];
+    NSURL *soundUrl = [NSURL fileURLWithPath:path];
+    self.tileAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
+}
+
+- (void)playTileSound {
+    [self.tileAudioPlayer play];
 }
 
 - (void)updateGridHighlighting {

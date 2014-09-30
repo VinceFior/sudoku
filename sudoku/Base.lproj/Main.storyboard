@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -171,7 +170,6 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="za9-2q-Gsc">
                                 <rect key="frame" x="519" y="957" width="217" height="47"/>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="0.94999999999999996" height="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                 <state key="normal" title=" Return to game     ">
@@ -191,13 +189,13 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3A-iv-Z7Q">
                                 <rect key="frame" x="61" y="558" width="647" height="266"/>
                                 <color key="backgroundColor" red="0.75400298833847046" green="0.89094424247741699" blue="0.37647795677185059" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <mutableString key="text">The goal of sudoku is to fill in the grid so each row, column, and 3x3 block holds the numbers 1 through 9. You can't place a number in a cell if the number is already in the row, column, or block.
+                                <string key="text">The goal of sudoku is to fill in the grid so each row, column, and 3x3 block holds the numbers 1 through 9. You can't place a number in a cell if the number is already in the row, column, or block.
 
 To place a number in a cell, select the number from the number pad and press the cell you want to place it in.
 
 In Easy mode, every cell you can place the selected number into is highlighted.
 In Medium mode, every cell that contains the selected number is highlighted.
-In Hard mode, there are no hints to help you.</mutableString>
+In Hard mode, there are no hints to help you.</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
